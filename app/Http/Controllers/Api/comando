@@ -1,1 +1,0 @@
-php artisan make:controller Api/[nombre]Controller --api --model=[Modelo]
