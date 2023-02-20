@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -18,6 +19,30 @@ class UserController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return UserResource::collection(User::all());
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function newToken(Request $request){
+
+        $request->validate([
+            'email'=>['required', 'email'],
+            'password'=>['required']
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => [__('auth.failed')]
+            ]);
+        }
+
+        return response()->json([
+            'token' => $user->createtoken($request->email)->plainTextToken
+        ]);
+
     }
 
     /**

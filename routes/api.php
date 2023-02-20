@@ -23,3 +23,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource("posts", PostController::class);
 });
 
+Route::post('/tokens/create', [UserController::class, 'newToken']);
+
+
