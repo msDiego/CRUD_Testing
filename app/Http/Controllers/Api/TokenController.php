@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TokenController extends Controller{
 
-    public function authenticate(Request $request): RedirectResponse
-    {
+    public function authenticate(Request $request): RedirectResponse {
 
         $credenciales = $request->validate([
             'email' => ['required', 'email'],

@@ -45,7 +45,7 @@ class CommunityController extends Controller
      */
     public function update(Request $request, Community $community): Response
     {
-        $community->create([
+        $community->update([
             'titulo' => $request->titulo,
         ]);
 

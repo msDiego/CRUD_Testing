@@ -11,8 +11,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-class UserController extends Controller
-{
+class UserController extends Controller{
+
     /**
      * Display a listing of the resource.
      */
